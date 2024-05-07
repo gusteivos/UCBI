@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
         }
 
-        if (!is_ascii_str(bf_source_code))
+        if (!is_ascii_string(bf_source_code))
         {
 
             fprintf(stderr, ".\n");
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 
 }
 
-static bool byte_is_ascii(unsigned char byte)
+static bool is_ascii_byte(unsigned char byte)
 {
 
     return (
@@ -67,7 +67,7 @@ static bool byte_is_ascii(unsigned char byte)
 
 }
 
-bool is_ascii_str(char *str)
+bool is_ascii_string(char *str)
 {
 
     if (!str)
@@ -82,7 +82,7 @@ bool is_ascii_str(char *str)
     while (*str_char)
     {
 
-        if (!byte_is_ascii((unsigned char)*str_char))
+        if (!is_ascii_byte((unsigned char)*str_char))
         {
 
             return false;
