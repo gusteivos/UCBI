@@ -7,8 +7,8 @@
     #include <stdbool.h>
     #include <string.h>
 
+    #include "utf8.h"
 
-    extern bool is_ascii_string(char *str);
 
     extern char *get_file_extension(char *file_path);
 

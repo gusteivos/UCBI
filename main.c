@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
         }
 
-        if (!is_ascii_string(bf_source_code))
+        if (!is_utf8_string(bf_source_code))
         {
 
             fprintf(stderr, ".\n");
@@ -52,48 +52,6 @@ int main(int argc, char *argv[])
     interpret(bf_source_code);
 
     return EXIT_SUCCESS;
-
-}
-
-static bool is_ascii_byte(unsigned char byte)
-{
-
-    return (
-            byte == 0x09 || /* \t */
-            byte == 0x0D || /* \r */
-            byte == 0x0A || /* \n */
-            (0x20 <= byte && byte <= 0x7E) /* or use byte <= 0x7F */
-           );
-
-}
-
-bool is_ascii_string(char *str)
-{
-
-    if (!str)
-    {
-
-        return false;
-
-    }
-
-    char *str_char = str;
-    
-    while (*str_char)
-    {
-
-        if (!is_ascii_byte((unsigned char)*str_char))
-        {
-
-            return false;
-
-        }
-
-        str_char++;
-
-    }
-    
-    return true;
 
 }
 
