@@ -1,15 +1,12 @@
 #include "main.h"
 
 
-extern void interpret(char* input);
-
-
 int main(int argc, char *argv[])
 {
 
-    char  *bf_source_code      = "++++[++++>---<]>-.---[----->+<]>-.+++[->+++<]>++.++++++++.+++++.-[->+++<]>-.[----->+++<]>.-[--->+<]>.++++++++.>++++++++++.";
+    char  *bf_source_code = "++++[++++>---<]>-.---[----->+<]>-.+++[->+++<]>++.++++++++.+++++.-[->+++<]>-.[----->+++<]>.-[--->+<]>.++++++++.>++++++++++.";
 
-    size_t bf_source_code_size = strlen(bf_source_code);
+    size_t bf_source_code_length = strlen(bf_source_code);
 
     if (argc > 1)
     {
@@ -18,21 +15,21 @@ int main(int argc, char *argv[])
 
         char *file_extension = get_file_extension(file_path);
 
-        if (strcmp((const char *)file_extension, ".bf") != 0)
+        if (!file_extension || strcmp((const char *)file_extension, ".bf") != 0)
         {
 
-            fprintf(stderr, ".\n");
+            fprintf(stderr, "a.\n");
 
             return EXIT_FAILURE;
 
         }
 
-        bf_source_code = load_file_no_cr(file_path, &bf_source_code_size);
+        bf_source_code = load_file_no_cr(file_path, &bf_source_code_length);
 
         if (!bf_source_code)
         {
 
-            fprintf(stderr, ".\n");
+            fprintf(stderr, "b.\n");
 
             return EXIT_FAILURE;
 
@@ -41,7 +38,7 @@ int main(int argc, char *argv[])
         if (!is_utf8_string(bf_source_code))
         {
 
-            fprintf(stderr, ".\n");
+            fprintf(stderr, "c.\n");
 
             return EXIT_FAILURE;
 
@@ -49,7 +46,17 @@ int main(int argc, char *argv[])
 
     }
 
-    interpret(bf_source_code);
+    size_t bf_memory_size = 1024 * 32;
+
+    uint8_t *bf_memory = (uint8_t *)calloc(bf_memory_size, sizeof(uint8_t));
+
+    size_t bf_stack_size = 1024 * 8;
+
+    size_t *bf_stack = (size_t *)calloc(bf_stack_size, sizeof(size_t));
+
+    interpret_bf_stack_dumb(bf_source_code, bf_source_code_length, 0,
+                            bf_memory, bf_memory_size, bf_memory,
+                            bf_stack, bf_stack_size, 0);
 
     return EXIT_SUCCESS;
 
@@ -166,6 +173,8 @@ char *load_file_no_cr(char *file_path, size_t *out_file_size)
         char_count++;
 
     }
+
+    file_data_buffer[char_count] = '\0';
 
     size_t file_data_size = strlen((const char *)file_data_buffer);
 
