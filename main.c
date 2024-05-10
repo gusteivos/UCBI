@@ -58,6 +58,35 @@ int main(int argc, char *argv[])
                             bf_memory, bf_memory_size, bf_memory,
                             bf_stack, bf_stack_size, 0);
 
+    bf_lex_source_code = bf_source_code;
+
+    bf_lex_source_code_length = bf_source_code_length;
+
+    bf_token_t bf_token;
+
+    do
+    {
+
+        bf_token = bf_lex_next_token();
+
+        if (bf_token.type == BF_T_T_INVALID)
+        {
+
+            if (!bf_token.line || !bf_token.column)
+            {
+
+                fprintf(stderr, "d.\n");
+
+            }
+
+            fprintf(stderr, "e: %s.\n", bf_token.value);
+
+            return EXIT_FAILURE;
+
+        }
+
+    } while (bf_token.type != BF_T_T_INVALID && bf_token.type != BF_T_T_EOS);
+
     return EXIT_SUCCESS;
 
 }

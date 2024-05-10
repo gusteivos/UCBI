@@ -8,8 +8,8 @@
     #include <string.h>
 
     #include "utf8.h"
+    #include "bf_lex.h"
     #include "bf.h"
-
 
     extern char *get_file_extension(char *file_path);
 
