@@ -6,12 +6,16 @@
     #include <stdlib.h>
     #include <string.h>
     #include <ctype.h>
+    #include <stdbool.h>
 
+    #define BF_LEX_CHARS "+-><[]"
 
     typedef enum bf_token_type_e
     {
 
         BF_T_T_INVALID = 0,
+
+        BF_T_T_COMMENT,
 
         BF_T_T_DATA_INCREMENT,
         BF_T_T_DATA_DECREMENT,
@@ -19,11 +23,11 @@
         BF_T_T_DATA_POINTER_INCREMENT,
         BF_T_T_DATA_POINTER_DECREMENT,
 
-        BF_T_T_DATA_WRITE,
-        BF_T_T_DATA_READ ,
+        BF_T_T_WRITE_DATA,
+        BF_T_T_READ_DATA,
 
-        BF_T_T_JUMP_IF_ZERO    ,
-        BF_T_T_JUMP_IF_NOT_ZERO,
+        BF_T_T_JUMP_IF_DATA_ZERO    ,
+        BF_T_T_JUMP_IF_DATA_NOT_ZERO,
 
         BF_T_T_EOS = EOF
 

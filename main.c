@@ -79,11 +79,23 @@ int main(int argc, char *argv[])
 
             }
 
+            fprintf(stdout, "l %d, c %d;\n", bf_token.line, bf_token.column);
+
             fprintf(stderr, "e: %s.\n", bf_token.value);
 
             return EXIT_FAILURE;
 
         }
+
+        if (bf_token.type == BF_T_T_COMMENT)
+        {
+    
+            fprintf(stdout, "l %d, c %d;\n", bf_token.line, bf_token.column);
+
+            fprintf(stdout, "cmt:\n%s\n", bf_token.value);
+
+        }
+
 
     } while (bf_token.type != BF_T_T_INVALID && bf_token.type != BF_T_T_EOS);
 
