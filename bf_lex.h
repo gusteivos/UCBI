@@ -50,8 +50,10 @@
 
     extern size_t bf_lex_source_code_length;
 
-    bf_token_t bf_lex_next_token(void);
+    extern bool bf_lex_is_end_of_source_code(void);
 
-    void bf_lex_reset(void);
+    extern bf_token_t bf_lex_next_token(void);
+
+    extern void bf_lex_reset(void);
 
 #endif

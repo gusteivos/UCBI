@@ -13,20 +13,11 @@ static size_t bf_lex_source_code_line = 1;
 static size_t bf_lex_source_code_column = 1;
 
 
-static bool bf_lex_is_end_of_source_code()
+bool bf_lex_is_end_of_source_code()
 {
 
-    if (
-        bf_lex_source_code_index >= bf_lex_source_code_length ||
-        bf_lex_source_code[bf_lex_source_code_index] == '\0'
-       )
-    {
-
-        return true;
-
-    }
-
-    return false;
+    return bf_lex_source_code_index >= bf_lex_source_code_length ||
+           bf_lex_source_code[bf_lex_source_code_index] == '\0';
 
 }
 
