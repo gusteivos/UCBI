@@ -8,7 +8,7 @@
     #include <ctype.h>
     #include <stdbool.h>
 
-    #define BF_LEX_CHARS "+-><[]"
+    #define BF_LEX_CHARS "+-><[].,"
 
     typedef enum bf_token_type_e
     {
